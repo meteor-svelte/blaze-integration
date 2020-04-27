@@ -47,6 +47,11 @@ to the normal Svelte rules for reactivity (ie. requiring an assignment):
 <BlazeTemplate template={Template.Label} data={labelData} />
 ```
 
+### Slotted content
+
+You can use `{{> Template.contentBlock}}` as in Blaze to spawn in the slotted
+content inside the BlazeTemplate component.
+
 ## Using Svelte inside Blaze
 
 To render a Svelte component inside a Blaze template, use the SvelteComponent
