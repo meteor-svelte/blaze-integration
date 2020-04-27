@@ -8,7 +8,7 @@ function create_fragment(ctx) {
     m(target, anchor) {
       const templ = (typeof ctx[0] === 'string') ? Template[ctx[0]] : ctx[0];
       const data = ctx[1];
-      blazeView = Blaze.renderWithData(templ.constructView(), () => data.get(), target);
+      blazeView = Blaze.renderWithData(templ.constructView(), () => data.get(), target, anchor);
     },
     p: noop,
     i: noop,
