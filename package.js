@@ -2,7 +2,7 @@ Package.describe({
   name: 'svelte:blaze-integration',
   version: '0.1.0',
   summary: 'Render Blaze templates inside your Svelte components.',
-  git: 'https://github.com/svelte/blaze-integration',
+  git: 'https://github.com/meteor-svelte/blaze-integration',
   documentation: 'README.md',
 });
 

@@ -24,10 +24,10 @@ This package is still very experimental.
   import { BlazeTemplate } from 'meteor/svelte:blaze-integration';
   import './label.html';
 
-  let data = {text: 'not clicked'};
+  let labelData = {text: 'not clicked'};
 
   function handleClick() {
-    data = {text: 'clicked'};
+    labelData = {text: 'clicked'};
   }
 </script>
 
