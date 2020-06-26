@@ -1,6 +1,13 @@
 import { SvelteComponent, create_slot, get_slot_changes, get_slot_context, init, noop, safe_not_equal, transition_in, transition_out } from "svelte/internal";
 import { ReactiveVar } from "meteor/reactive-var";
 
+function lookupTemplate(name) {
+  if (Blaze.Template[name]) {
+    return Blaze.Template[name];
+  }
+  return Blaze._getGlobalHelper(name);
+}
+
 function create_fragment(ctx) {
   let blazeView;
   let current;
@@ -10,7 +17,7 @@ function create_fragment(ctx) {
   return {
     c: noop,
     m(target, anchor) {
-      const templ = (typeof ctx[0] === 'string') ? Template[ctx[0]] : ctx[0];
+      const templ = (typeof ctx[0] === 'string') ? lookupTemplate(ctx[0]) : ctx[0];
       const data = ctx[1];
 
       blazeView = Blaze.renderWithData(templ.constructView(function () {
