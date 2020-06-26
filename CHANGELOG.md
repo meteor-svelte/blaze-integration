@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.0
+- Switch to more friendly prop syntax for `{{> SvelteComponent}}`
+- Allow directly passing component as only arg to `{{> SvelteComponent}}`
+
 ## 0.3.1
 - Support passing global Blaze helpers to <BlazeTemplate>
 

@@ -1,7 +1,7 @@
 # `svelte:blaze-integration`
 
-This package makes it possible to instantiate Blaze templates inside Svelte
-components, with reactivity across boundaries.
+This Meteor package makes it possible to instantiate Blaze templates inside
+Svelte components, with reactivity across boundaries.
 
 This package is still experimental.
 
@@ -55,12 +55,13 @@ content inside the BlazeTemplate component.
 ## Using Svelte inside Blaze
 
 To render a Svelte component inside a Blaze template, use the SvelteComponent
-template.  This takes the component class and the props as data arguments.
+template.  This works similarly to Svelte's own `<svelte:component>`, and takes
+the component as `this` argument and the props as remaining arguments.
 
 **MyTemplate.html**
 ```html
 <template name="MyTemplate">
-  {{> SvelteComponent component=component props=props}}
+  {{> SvelteComponent this=MyComponent first="Hello" second="world"}}
 </template>
 ```
 
@@ -69,12 +70,7 @@ template.  This takes the component class and the props as data arguments.
 import MyComponent from './MyComponent.svelte';
 
 Template.MyTemplate.helpers({
-  component() {
-    return MyComponent;
-  },
-  props() {
-    return {first: 'hello', second: 'world'};
-  },
+  MyComponent: () => MyComponent,
 });
 ```
 
@@ -88,6 +84,34 @@ Template.MyTemplate.helpers({
 <p>{first} {second}!</p>
 ```
 
+If you wish to determine the selection of props programmatically, you can use
+the single-argument form instead:
+
+**MyTemplate.html**
+```html
+<template name="MyTemplate">
+  {{> SvelteComponent myHelperFunction}}
+</template>
+```
+
+**MyTemplate.js**
+```js
+import MyComponent from './MyComponent.svelte';
+
+Template.MyTemplate.helpers({
+  myHelperFunction() {
+    return {
+      this: MyComponent,
+      first: "Hello",
+      second: "world",
+    };
+  },
+});
+```
+
+You can also directly return MyComponent, but that method will not support
+additional properties.
+
 ### Slotted content
 
 Slotted content (like `Template.contentBlock`) is also supported.  For example:
@@ -95,7 +119,7 @@ Slotted content (like `Template.contentBlock`) is also supported.  For example:
 **MyTemplate.html**
 ```html
 <template name="MyTemplate">
-  {{#SvelteComponent component=myHelperFunction}}
+  {{#SvelteComponent this=myComponentHelper}}
     Welcome
   {{/SvelteComponent}}
 </template>
