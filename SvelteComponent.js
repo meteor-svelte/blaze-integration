@@ -61,7 +61,7 @@ Template.SvelteComponent.onRendered(function onRendered() {
 });
 
 Template.SvelteComponent.onDestroyed(function onDestroyed() {
-  this.component.$destroy();
+  if (this.component) this.component.$destroy();
 });
 
 function create_default_slot(ctx) {

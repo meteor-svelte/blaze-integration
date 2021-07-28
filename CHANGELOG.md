@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.4.1
+- Fix potential error if component is destroyed before it has a chance to render.
+
 ## 0.4.0
 - Switch to more friendly prop syntax for `{{> SvelteComponent}}`
 - Allow directly passing component as only arg to `{{> SvelteComponent}}`
